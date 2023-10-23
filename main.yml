@@ -12,6 +12,7 @@
 #    - devsec.hardening
   roles:
     - core
+    - usbc-gadget
 #    - os_hardening
 #    - ssh_hardening
 
@@ -23,9 +24,6 @@
       package: name=git state=present
 
   tasks:
-#    - name: usbc gadget setup
-#      become: yes
-#      import_tasks: playbooks/usbc-gadget.yml
 #    - name: docker setup
 #      become: yes
 #      import_tasks: playbooks/docker-setup.yml

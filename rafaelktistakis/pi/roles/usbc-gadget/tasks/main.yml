@@ -1,4 +1,5 @@
 ---
+# tasks file for usbc-gadget
 - name: Make necessary changes in config.txt
   ini_file:
     path: /boot/config.txt
@@ -24,8 +25,6 @@
     path: /etc/dhcpcd.conf
     line: 'denyinterfaces usb0'
 
-#- name: Install apache dnsmasq
-#  command: apt install dnsmasq -y
 
 - name: Update /etc/dhcpcd.conf to exclude usb0
   blockinfile:
@@ -53,15 +52,11 @@
 
 - name: Copy usb.sh into place.
   copy:
-    src: ./include/usb.sh
+    src: usb.sh
     dest: /root/usb.sh
     owner: root
     group: root
     mode: 0755
-#    mode: 0644
-
-#- name: Changing perm of /root/usb.sh
-#  file: dest=/root/usb.sh mode=+x
 
 - name: Cron "@reboot bash /root/usb.sh"
   ansible.builtin.cron:
