@@ -14,6 +14,7 @@
     - core
     - usbc-gadget
     - docker
+    - code-tunnel
 #    - os_hardening
 #    - ssh_hardening
 
@@ -46,7 +47,3 @@
   #  - name: Homebridge setup
   #    become: yes
   #    import_tasks: playbooks/homebridge-setup.yml
-    # - name: Code Server (self-hosted)
-    #   become: yes
-    #   import_tasks: playbooks/code-tunnel-server-setup.yml
-    
