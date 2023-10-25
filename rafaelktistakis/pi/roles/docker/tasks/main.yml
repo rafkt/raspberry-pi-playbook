@@ -1,4 +1,5 @@
 ---
+# tasks file for docker
 # Configure APT to include Docker repository
 - name: Add Docker GPG apt Key
   apt_key:
@@ -23,6 +24,3 @@
 - name: Install Docker Module for Python
   pip:
     name: docker
-- name: Debug
-  debug: msg={{ item }}
-  with_items: '{{ tasks_to_include }}'

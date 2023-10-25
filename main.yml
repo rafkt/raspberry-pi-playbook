@@ -13,6 +13,7 @@
   roles:
     - core
     - usbc-gadget
+    - docker
 #    - os_hardening
 #    - ssh_hardening
 
@@ -48,3 +49,4 @@
     # - name: Code Server (self-hosted)
     #   become: yes
     #   import_tasks: playbooks/code-tunnel-server-setup.yml
+    
