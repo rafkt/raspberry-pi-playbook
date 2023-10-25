@@ -15,6 +15,7 @@
     - usbc-gadget
     - docker
     - code-tunnel
+    - fstab-umask-fix
 #    - os_hardening
 #    - ssh_hardening
 
@@ -25,19 +26,13 @@
     - name: verify git installation.
       package: name=git state=present
 
-  tasks:
-#    - name: docker setup
-#      become: yes
-#      import_tasks: playbooks/docker-setup.yml
+  # task:
 #    - name: plex setup
 #      become: yes
 #      import_tasks: playbooks/plex-setup.yml
 #    - name: rtorrent setup
 #      become: yes
 #      import_tasks: playbooks/qbittorrent-setup.yml
-#    - name: external mount permissions
-#      become: yes
-#      import_tasks: playbooks/external-mount-setup.yml
   #  - name: Starship setup
   #    become: yes
   #    import_tasks: playbooks/starship-setup.yml

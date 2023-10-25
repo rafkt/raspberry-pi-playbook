@@ -1,4 +1,5 @@
 ---
+# tasks file for fstab-umask-fix
 - name: Ensures user directory for drive mount
   file:
     path: /media/{{ target_username }}
@@ -6,6 +7,12 @@
     owner: "{{ target_username }}"
     group: "{{ target_username }}"
     mode: 0777
+
+- name: Un-mount drive if mounted
+  mount:
+    state: unmounted
+    src: "{{ ext_drive }}"
+    path: /media/{{ target_username }}/{{ disk_name }}
 
 - name: Creates directory for drive mount
   file:
@@ -18,6 +25,7 @@
 - name: Getting UUID of external drive
   shell: blkid -s UUID -o value {{ ext_drive }}
   register: blkid_out
+  changed_when: false
 
 - name: Updating fstab. Ensure you umount and mount drive again
 #  lineinfile:
@@ -29,3 +37,5 @@
 #    regexp: "^UUID={{ blkid_out.stdout }}"
 #    line: "UUID={{ blkid_out.stdout }} /media/{{ target_username }}/{{ disk_name }} exfat defaults,auto,umask=000,users,rw 0 0"
 
+- name: Ensure all sftab drives are mounted
+  shell: mount -a
