@@ -1,23 +1,35 @@
 ---
-- hosts: pi
+- hosts: "{{ target }}"
   become: yes
   gather_facts: true
   ignore_errors: yes
+  vars_files:
+    - config.yml
 
-- name: OS Hardening devsec
+- name: Setting up Raspberry Pi
   hosts: pi
   become: yes
   collections:
     - rafaelktistakis.pi
-#    - devsec.hardening
+    - devsec.hardening
   roles:
     - core
-    - usbc-gadget
-    - docker
-    - code-tunnel
-    - fstab-umask-fix
+    # - usbc-gadget
+    # - docker
+    # - code-tunnel
+    # - fstab-umask-fix
 #    - os_hardening
-#    - ssh_hardening
+  #  - ssh_hardening
+
+- name: Setting up Pi Zero 2
+  hosts: 
+    - fi
+    - ocarina
+  become: yes
+  collections:
+    - rafaelktistakis.pi
+    - devsec.hardening
+  roles:
 
   vars_files:
     - config.yml

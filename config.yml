@@ -1,4 +1,7 @@
 ---
+target:
+- pi
+- fi
 # User some changes will be applied to, e.g. zshrc configuration, permissions etc. 
 target_username: rafaelktistakis
 # Plex repository settings

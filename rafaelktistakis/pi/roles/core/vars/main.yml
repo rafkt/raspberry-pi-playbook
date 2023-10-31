@@ -32,5 +32,6 @@ packages_install:
 - virtualenv
 - python3-setuptools
 - fonts-firacode
+- sshpass
 
 packages_remove:
