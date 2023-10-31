@@ -5,8 +5,11 @@
   ignore_errors: yes
   vars_files:
     - config.yml
+    - vault.yml
+  vars:
+    - ansible_become_pass: '{{ su_password }}'
 
-- name: Setting up Raspberry Pi
+- name: Setting up Raspberry Pi / Pi
   hosts: pi
   become: yes
   collections:
@@ -20,23 +23,33 @@
     # - fstab-umask-fix
 #    - os_hardening
   #  - ssh_hardening
+  vars_files:
+    - config.yml
+    - vault.yml
+  vars:
+    - ansible_become_pass: '{{ su_password }}'
+  pre_tasks:
+    - name: verify git installation.
+      package: name=git state=present
 
-- name: Setting up Pi Zero 2
+- name: Setting up Pi Zero 2 / Ocarina
   hosts: 
-    - fi
     - ocarina
   become: yes
   collections:
     - rafaelktistakis.pi
     - devsec.hardening
   roles:
-
   vars_files:
     - config.yml
-
+    - vault.yml
+  vars:
+    - ansible_become_pass: '{{ su_password }}'
   pre_tasks:
     - name: verify git installation.
       package: name=git state=present
+
+
 
   # task:
 #    - name: plex setup

@@ -45,4 +45,6 @@ bindkey "$terminfo[kcuu1]" history-beginning-search-backward-end
 bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
 export PATH=$PATH:/snap/bin
 eval "$(starship init zsh)"
+export VISUAL="nano"
+export EDITOR="nano"
 # END ANSIBLE MANAGED BLOCK
