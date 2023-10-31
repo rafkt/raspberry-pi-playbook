@@ -2,7 +2,7 @@
 127.0.0.1 ansible_connection=local
 
 [fi]
-192.168.1.109 ansible_ssh_user='rafaelktistakis'
+192.168.1.109 ansible_ssh_user='rafaelktistakis' ansible_ssh_private_key_file=/path.pem
 
 [ocarina]
 192.168.1.155 ansible_ssh_user='rafaelktistakis'
