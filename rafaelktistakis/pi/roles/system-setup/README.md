@@ -1,7 +1,7 @@
-Core
+system-setup
 =========
 
-Core utilities for a Pi
+system-setup utilities for a Pi
 
 Requirements
 ------------

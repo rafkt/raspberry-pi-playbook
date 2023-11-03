@@ -1,5 +1,5 @@
 ---
-# vars file for core
+# vars file for system-setup
 #B1 cli, B2 cli autologin, B3 desktop, B4 desktop autologin
 BOOTBEHAVIOUR: B1
 

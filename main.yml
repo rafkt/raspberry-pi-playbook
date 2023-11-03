@@ -16,7 +16,7 @@
     - rafaelktistakis.pi
     - devsec.hardening
   roles:
-    # - core
+    - rafaelktistakis.pi.system-setup
     # - usbc-gadget
     # - docker
     # - code-tunnel
