@@ -1,0 +1,27 @@
+---
+# tasks file for system-setup
+- name: Initial user setup with groups and shell
+  user:
+    name: "{{ target_username }}"
+    state: present
+    create_home: true
+    shell: /usr/bin/bash
+    groups: 
+      - dietpi 
+      - sudo 
+      - video
+
+- name: Adjusting swap to size
+  shell: /boot/dietpi/func/dietpi-set_swapfile {{ swap_size }}
+  register: task_result
+  changed_when: "'was already set' not in task_result.stdout"
+
+- name: Setting Headless
+  shell: /boot/dietpi/func/dietpi-set_hardware headless {{ enable_headless }}
+  register: task_result
+  changed_when: "'was already set' not in task_result.stdout"
+
+- name: Autostart setup
+  shell: /boot/dietpi/dietpi-autostart {{ console_autostart }}
+  register: task_result
+  changed_when: "'rm ' in task_result.stdout"

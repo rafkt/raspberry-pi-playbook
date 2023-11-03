@@ -42,7 +42,7 @@
     - rafaelktistakis.dietpi
     - devsec.hardening
   roles:
-    - user-setup
+    - system-setup
   vars_files:
     - config.yml
     - vault.yml
