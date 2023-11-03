@@ -1,5 +1,5 @@
 ---
-# defaults file for core
+# defaults file for system-setup
 bootbehaviour:
   B1: '01'
   B2: '00'

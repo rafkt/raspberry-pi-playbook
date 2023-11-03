@@ -1,5 +1,5 @@
 ---
-# handlers file for core
+# handlers file for system-setup
 - name: Reboot the machine
   become: yes
   shell: "sleep 10 && reboot"
