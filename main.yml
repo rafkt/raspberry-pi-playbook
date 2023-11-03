@@ -14,9 +14,11 @@
   become: yes
   collections:
     - rafaelktistakis.pi
+    - rafaelktistakis.linux
     - devsec.hardening
   roles:
-    - rafaelktistakis.pi.system-setup
+    - system-setup
+    - packages
     # - usbc-gadget
     # - docker
     # - code-tunnel
@@ -28,6 +30,8 @@
     - vault.yml
   vars:
     - ansible_become_pass: '{{ su_password }}'
+    - packages_remove: 
+      - screen
   pre_tasks:
     - name: verify git installation
       package: name=git state=present
@@ -42,7 +46,7 @@
     - rafaelktistakis.dietpi
     - devsec.hardening
   roles:
-    - system-setup
+    - rafaelktistakis.dietpi.system-setup
   vars_files:
     - config.yml
     - vault.yml

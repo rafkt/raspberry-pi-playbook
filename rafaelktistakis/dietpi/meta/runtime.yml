@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Rafael Ktistakis
-  description: This Ansible role provides numerous configurations and adjustments for a dietpi distro
+  description: This Ansible collection provides numerous configurations and adjustments for a dietpi distro
   company: R
   license: Apache License 2.0
   min_ansible_version: 2.9.10
