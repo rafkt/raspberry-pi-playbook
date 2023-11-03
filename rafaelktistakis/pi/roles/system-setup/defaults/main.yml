@@ -5,35 +5,3 @@ bootbehaviour:
   B2: '00'
   B3: '11'
   B4: '10'
-
-packages_install:
-- screen
-- tmux
-- vim
-- code
-- mosh
-- snapd
-#      - etckeeper
-- git
-- at
-- dnsmasq
-- exfat-fuse
-- exfat-utils
-- unrar
-- zsh
-- apt-transport-https
-- ca-certificates
-- curl
-- software-properties-common
-- python3-pip
-- virtualenv
-- python3-setuptools
-- fonts-firacode
-- sshpass
-- avahi-daemon
-- avahi-utils
-- avahi-dnsconfd
-- avahi-discover
-- libnss-mdns
-
-packages_remove:
