@@ -1,0 +1,13 @@
+---
+# tasks file for overclock
+- name: Overclocking the little Pi
+  blockinfile:
+    path: /boot/config.txt
+    create: false
+    state: present
+    insertafter: "arm_freq"
+    mode: 0755
+    block: |
+      {{ overclock_option_selection }}
+  notify: Reboot the machine
+

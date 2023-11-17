@@ -19,6 +19,7 @@
   roles:
     - system-setup
     - packages
+    - overclock
     # - usbc-gadget
     # - docker
     # - code-tunnel
@@ -30,8 +31,6 @@
     - vault.yml
   vars:
     - ansible_become_pass: '{{ su_password }}'
-    - packages_remove: 
-      - screen
   pre_tasks:
     - name: verify git installation
       package: name=git state=present
@@ -42,11 +41,11 @@
     - fi
   become: yes
   collections:
-    - rafaelktistakis.pi
+    # - rafaelktistakis.pi
     - rafaelktistakis.dietpi
     - devsec.hardening
   roles:
-    - rafaelktistakis.dietpi.system-setup
+    - system-setup
   vars_files:
     - config.yml
     - vault.yml
