@@ -9,7 +9,6 @@
     state: present
     channel: latest/edge
 
-      
 - name: Copy screenrc
   copy:
     src: screenrc
@@ -37,6 +36,15 @@
     mode: 0644
     backup: yes
 
+- name: Copy Vnc quick command prompt
+  copy:
+    src: vnc.sh
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: 0755
+    backup: no
+
 - name: Copy isThrottled
   copy:
     src: isThrottled.sh
@@ -46,9 +54,9 @@
     mode: 0755
     backup: no
 
-- name: Copy Vnc quick command prompt
+- name: Copy Helper script to list all my helper scripts
   copy:
-    src: vnc.sh
+    src: list-helpers.sh
     dest: /usr/local/bin
     owner: root
     group: root
@@ -60,23 +68,6 @@
     name: "{{ item.option }}"
     shell: /bin/{{ item.value }}
   with_items: '{{ users_shell_changes }}'
-
-- name: Overclocking the little Pi
-  blockinfile:
-    path: /boot/config.txt
-    create: false
-    state: present
-    insertafter: "arm_freq"
-    mode: 0755
-    block: |
-      over_voltage=2
-      arm_freq=1800
-#      If you want to get crazy try alternatively the below values instead
-#      over_voltage=6
-#      arm_freq=2147
-#      gpu_freq=750
-  notify: Reboot the machine
-
 
 - name: Get VNC behaviour
   shell: raspi-config nonint get_vnc
@@ -101,4 +92,4 @@
 - name: Set Boot behaviour
   shell: raspi-config nonint do_boot_behaviour {{ BOOTBEHAVIOUR }}
   when: not cli_flag.stdout ~ autologin_flag.stdout in bootbehaviour[BOOTBEHAVIOUR]
-  notify: Reboot the machine
+  notify: Reboot the machine 
