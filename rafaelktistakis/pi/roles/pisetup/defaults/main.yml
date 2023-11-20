@@ -1,5 +1,5 @@
 ---
-# defaults file for system-setup
+# defaults file for pisetup
 bootbehaviour:
   B1: '01'
   B2: '00'

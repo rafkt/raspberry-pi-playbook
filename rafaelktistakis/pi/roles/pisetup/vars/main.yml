@@ -1,5 +1,5 @@
 ---
-# vars file for system-setup
+# vars file for pisetup
 #B1 cli, B2 cli autologin, B3 desktop, B4 desktop autologin
 BOOTBEHAVIOUR: B1
 

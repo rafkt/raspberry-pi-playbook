@@ -1,6 +1,6 @@
 galaxy_info:
   author: Rafael Ktistakis
-  description: Setting up system-setup Functionality for Raspberry Pi
+  description: Setting up pisetup Functionality for Raspberry Pi
   company: Flynn
 
   # If the issue tracker for your role is not on github, uncomment the
