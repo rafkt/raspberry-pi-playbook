@@ -21,6 +21,7 @@
     - packages
     - overclock
     - plex
+    - starship
     # - usbc-gadget
     # - docker
     # - code-tunnel
@@ -65,9 +66,6 @@
 #    - name: rtorrent setup
 #      become: yes
 #      import_tasks: playbooks/qbittorrent-setup.yml
-  #  - name: Starship setup
-  #    become: yes
-  #    import_tasks: playbooks/starship-setup.yml
 #    - name: Tmux setup
 #      become: yes
 #      import_tasks: playbooks/tmux-setup.yml
