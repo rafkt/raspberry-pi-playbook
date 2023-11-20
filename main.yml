@@ -41,7 +41,7 @@
     - fi
   become: yes
   collections:
-    # - rafaelktistakis.pi
+    - rafaelktistakis.pi
     - rafaelktistakis.dietpi
     - devsec.hardening
   roles:
