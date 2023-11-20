@@ -17,7 +17,7 @@
     - rafaelktistakis.linux
     - devsec.hardening
   roles:
-    - system-setup
+    - pisetup
     - packages
     - overclock
     # - usbc-gadget

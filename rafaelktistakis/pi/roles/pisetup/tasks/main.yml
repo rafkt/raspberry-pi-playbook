@@ -1,5 +1,5 @@
 ---
-# tasks file for system-setup
+# tasks file for pisetup
 - name: Snap packages
   snap:
     name:

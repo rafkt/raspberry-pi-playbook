@@ -1,7 +1,7 @@
-system-setup
+pisetup
 =========
 
-system-setup utilities for a Pi
+General setup utilities for a Pi
 
 Requirements
 ------------
