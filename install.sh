@@ -15,5 +15,10 @@ ansible-playbook main.yml
 # if newer debian
 # Add user ALL=(ALL) NOPASSWD: ALL
 # or revert to user ALL=(ALL) ALL
-# Alternatively:
+# Alternatively use ansible-vault to encrypt the password and use it in the playbook:
 # ansible-vault create vault.yml
+# ansible-vault encrypt vault.yml --vault-id my_key@./scripts/run_key.sh --encrypt-vault-id my_key
+# ansible-vault decrypt vault.yml --vault-id my_key@./scripts/run_key.sh
+# Above encrypt/dectypt uses keyctl as the backend key manager.
+# Usefule keyctl commands:
+# keyctl request user my_key, keyctl print <key-id>, keyctl revoke <key-id>
