@@ -20,6 +20,7 @@
     - pisetup
     - packages
     - overclock
+    - plex
     # - usbc-gadget
     # - docker
     # - code-tunnel
@@ -60,9 +61,7 @@
 
 
   # task:
-#    - name: plex setup
-#      become: yes
-#      import_tasks: playbooks/plex-setup.yml
+
 #    - name: rtorrent setup
 #      become: yes
 #      import_tasks: playbooks/qbittorrent-setup.yml

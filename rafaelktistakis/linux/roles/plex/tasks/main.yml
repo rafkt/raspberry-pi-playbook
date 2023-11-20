@@ -1,6 +1,5 @@
 ---
-# tasks file for plex / debian
-
+# tasks file for plex
 - name: Configure Plex repository
   apt_repository:
     repo: "{{ plex_repo_url }}"
