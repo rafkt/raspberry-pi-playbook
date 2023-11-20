@@ -1,5 +1,5 @@
 ---
-# tasks file for system-setup
+# tasks file for dietpisetup
 - name: Initial user setup with groups and shell
   user:
     name: "{{ target_username }}"
