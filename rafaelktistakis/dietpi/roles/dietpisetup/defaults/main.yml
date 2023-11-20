@@ -1,5 +1,5 @@
 ---
-# defaults file for system-setup
+# defaults file for dietpisetup
 enable_headless: 1
 disable_headless: 0
 swap_size: 8192
