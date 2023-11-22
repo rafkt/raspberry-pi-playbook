@@ -22,6 +22,7 @@
     - overclock
     - plex
     - starship
+    - tmux
     # - usbc-gadget
     # - docker
     # - code-tunnel
