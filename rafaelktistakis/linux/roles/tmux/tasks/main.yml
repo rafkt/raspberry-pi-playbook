@@ -1,14 +1,16 @@
 ---
+# tasks file for tmux
 - name: Verify tmux installation.
   package: name=tmux state=present
 
 - name: Copy Tmux conf
   copy:
-    src: ./include/.tmux.conf
+    src: .tmux.conf
     dest: /home/{{ target_username }}/.tmux.conf
     owner: "{{ target_username }}"
     group: "{{ target_username }}"
     mode: 0644
+  notify: Reload Tmux
 
 - name: Setting Tmux Plugin Manager
   become_user: "{{ target_username }}"
@@ -21,7 +23,7 @@
 
 - name: Copy rpi-temp script for dracula tmux
   copy:
-    src: ./include/rpi_temp.sh
+    src: rpi_temp.sh
     dest: /home/{{ target_username }}/.tmux/plugins/tmux/scripts/rpi_temp.sh
     owner: "{{ target_username }}"                                                                              
     group: "{{ target_username }}"                                                                              
@@ -29,16 +31,9 @@
 
 - name: Copy rpi-throttled script for dracula tmux
   copy:
-    src: ./include/rpi_throttled.sh
+    src: rpi_throttled.sh
     dest: /home/{{ target_username }}/.tmux/plugins/tmux/scripts/rpi_throttled.sh
     owner: "{{ target_username }}"                                  
     group: "{{ target_username }}"                                  
     mode: 0755
 
-# Afer reload, install any new plugins within Tmux by hitting ctl-T and then I
-# Uninstall removed plugins by ctl-T alt-U
-# Update plugins by ctl-T U
-# Note ctl-T is the current defined Tmux prefix for command. Align if you change this. 
-- name: Reload Tmux
-  become_user: "{{ target_username }}"
-  shell: tmux source-file /home/{{ target_username }}/.tmux.conf
