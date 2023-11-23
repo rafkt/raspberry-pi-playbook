@@ -1,0 +1,6 @@
+---
+# handlers file for qbittorrent
+- name: Restart the qBitTorrent service
+  systemd:
+    name: qbittorrent.service
+    state: restarted

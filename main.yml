@@ -24,6 +24,7 @@
     - starship
     - tmux
     - homebridge
+    - qbittorrent
     # - usbc-gadget
     # - docker
     # - code-tunnel
@@ -60,11 +61,3 @@
       package: name=git state=present
     - name: Verify OpenSsh installation
       package: name=openssh-server state=present
-
-
-
-  # task:
-
-#    - name: rtorrent setup
-#      become: yes
-#      import_tasks: playbooks/qbittorrent-setup.yml
