@@ -6,7 +6,7 @@ General setup utilities for a Pi
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+A set of packages needs to present on the system. Still pending to define this or apply a pre-task condition. Ensure running the packages roles under the rafaelktistakis.linux collection.
 
 Role Variables
 --------------

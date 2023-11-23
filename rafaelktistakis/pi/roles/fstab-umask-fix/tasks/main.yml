@@ -1,5 +1,20 @@
 ---
 # tasks file for fstab-umask-fix
+- name: Getting UUID of external drive
+  shell: blkid -s UUID -o value {{ ext_drive }}
+  register: blkid_out
+  changed_when: false
+
+- name: Updating fstab. Checking if change is needed
+  blockinfile:
+    path: /etc/fstab
+    state: present
+    block:  |
+      UUID={{ blkid_out.stdout }} /media/{{ target_username }}/{{ disk_name }} exfat defaults,auto,umask=000,users,rw 0 0
+  check_mode: true
+  register: fstab_out
+
+
 - name: Ensures user directory for drive mount
   file:
     path: /media/{{ target_username }}
@@ -7,12 +22,14 @@
     owner: "{{ target_username }}"
     group: "{{ target_username }}"
     mode: 0777
+  when: fstab_out.changed
 
 - name: Un-mount drive if mounted
   mount:
     state: unmounted
     src: "{{ ext_drive }}"
     path: /media/{{ target_username }}/{{ disk_name }}
+  when: fstab_out.changed
 
 - name: Creates directory for drive mount
   file:
@@ -21,11 +38,7 @@
     owner: "{{ target_username }}"
     group: "{{ target_username }}"
     mode: 0777
-
-- name: Getting UUID of external drive
-  shell: blkid -s UUID -o value {{ ext_drive }}
-  register: blkid_out
-  changed_when: false
+  when: fstab_out.changed
 
 - name: Updating fstab. Ensure you umount and mount drive again
 #  lineinfile:
@@ -36,6 +49,8 @@
       UUID={{ blkid_out.stdout }} /media/{{ target_username }}/{{ disk_name }} exfat defaults,auto,umask=000,users,rw 0 0
 #    regexp: "^UUID={{ blkid_out.stdout }}"
 #    line: "UUID={{ blkid_out.stdout }} /media/{{ target_username }}/{{ disk_name }} exfat defaults,auto,umask=000,users,rw 0 0"
+  when: fstab_out.changed
 
 - name: Ensure all sftab drives are mounted
   shell: mount -a
+  when: fstab_out.changed

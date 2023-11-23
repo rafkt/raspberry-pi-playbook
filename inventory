@@ -10,3 +10,6 @@ fi.local ansible_ssh_user='rafaelktistakis'
 
 [ocarina]
 ocarina.local ansible_ssh_user='rafaelktistakis'
+
+[ganondorf]
+ganondorf.local ansible_ssh_user='rafaelktistakis'

@@ -8,6 +8,11 @@
     - vault.yml
   vars:
     - ansible_become_pass: '{{ su_password }}'
+  pre_tasks:
+  - name: verify git installation
+    package: name=git state=present
+  - name: Verify OpenSsh installation
+    package: name=openssh-server state=present
 
 - name: Setting up Raspberry Pi / Pi
   hosts: pi
@@ -25,12 +30,12 @@
     - tmux
     - homebridge
     - qbittorrent
-    # - usbc-gadget
-    # - docker
-    # - code-tunnel
-    # - fstab-umask-fix
-#    - os_hardening
-  #  - ssh_hardening
+    - usbc-gadget
+    - docker
+    - code-tunnel
+    - fstab-umask-fix
+    # - os_hardening
+    # - ssh_hardening
   vars_files:
     - config.yml
     - vault.yml
@@ -39,6 +44,25 @@
   pre_tasks:
     - name: verify git installation
       package: name=git state=present
+
+
+- name: Setting up Raspberry Pi 5
+  hosts: ganondorf
+  become: yes
+  collections:
+    - rafaelktistakis.pi
+    - rafaelktistakis.linux
+    - devsec.hardening
+  roles:
+    - packages
+    - pisetup
+    - starship
+    - tmux
+    - docker
+    - code-tunnel
+    # - os_hardening
+    # - ssh_hardening
+
 
 - name: Setting up Pi Zero 2 / Ocarina - Fi
   hosts: 
@@ -56,8 +80,3 @@
     - vault.yml
   vars:
     - ansible_become_pass: '{{ su_password }}'
-  pre_tasks:
-    - name: verify git installation
-      package: name=git state=present
-    - name: Verify OpenSsh installation
-      package: name=openssh-server state=present
