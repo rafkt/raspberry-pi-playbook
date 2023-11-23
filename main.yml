@@ -23,6 +23,7 @@
     - plex
     - starship
     - tmux
+    - homebridge
     # - usbc-gadget
     # - docker
     # - code-tunnel
@@ -67,9 +68,3 @@
 #    - name: rtorrent setup
 #      become: yes
 #      import_tasks: playbooks/qbittorrent-setup.yml
-#    - name: Tmux setup
-#      become: yes
-#      import_tasks: playbooks/tmux-setup.yml
-  #  - name: Homebridge setup
-  #    become: yes
-  #    import_tasks: playbooks/homebridge-setup.yml
