@@ -1,12 +1,10 @@
 ---
+# tasks file for qbittorrent
 - name: Install packages
   apt:
     state: present
     update_cache: true
     name: "{{ packages }}"
-  vars:
-    packages:
-    - qbittorrent-nox
   register: installed
 
 - name: Create qBitTorrent User
@@ -42,6 +40,7 @@
       
       [Install]
       WantedBy=multi-user.target
+  notify: Restart the qBitTorrent service
 
 - name: Ensure the qBitTorrent service is running
   systemd:
@@ -57,6 +56,7 @@
     repo: 'https://github.com/repslet/nightwalker.git'
     dest: /home/qbittorrent/theme
   when: installed.changed
+  notify: Restart the qBitTorrent service
 
 - name: Setting Theme permissions
   file:
@@ -69,11 +69,6 @@
 
 - name: Set qBitTorrent settings
   copy:
-    src: ./include/qBittorrent.conf
+    src: qBittorrent.conf
     dest: /home/qbittorrent/.config/qBittorrent/qBittorrent.conf
-
-- name: Restart the qBitTorrent service
-  systemd:
-    name: qbittorrent.service
-    state: restarted
-  when: installed.changed
+  notify: Restart the qBitTorrent service
