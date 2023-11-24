@@ -29,19 +29,23 @@
     group: "{{ target_username }}"                                                                              
     mode: 0755
 
-- name: Copy rpi-temp script for dracula tmux
-  copy:
-    src: rpi_temp.sh
-    dest: /home/{{ target_username }}/.tmux/plugins/tmux/scripts/rpi_temp.sh
-    owner: "{{ target_username }}"                                                                              
-    group: "{{ target_username }}"                                                                              
-    mode: 0755
-
-- name: Copy rpi-throttled script for dracula tmux
-  copy:
-    src: rpi_throttled.sh
-    dest: /home/{{ target_username }}/.tmux/plugins/tmux/scripts/rpi_throttled.sh
-    owner: "{{ target_username }}"                                  
-    group: "{{ target_username }}"                                  
-    mode: 0755
-
+- block:
+  - name: Copy rpi-temp script for dracula tmux
+    copy:
+      src: rpi_temp.sh
+      dest: /home/{{ target_username }}/.tmux/plugins/tmux/scripts/rpi_temp.sh
+      owner: "{{ target_username }}"                                                                              
+      group: "{{ target_username }}"                                                                              
+      mode: 0755
+  - name: Copy rpi-throttled script for dracula tmux
+    copy:
+      src: rpi_throttled.sh
+      dest: /home/{{ target_username }}/.tmux/plugins/tmux/scripts/rpi_throttled.sh
+      owner: "{{ target_username }}"                                  
+      group: "{{ target_username }}"                                  
+      mode: 0755
+  rescue:
+  - name: Print custom message before failing the host
+    fail:
+      msg: "The above script is for the dracula tmux theme. Running it requires to have installed the plugins first. That's done by ctl-T + I in a tmux session"
+    ignore_errors: true
