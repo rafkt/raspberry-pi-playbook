@@ -22,8 +22,8 @@
     - rafaelktistakis.linux
     - devsec.hardening
   roles:
-    - pisetup
     - packages
+    - pisetup
     - overclock
     - plex
     - starship
@@ -54,14 +54,19 @@
     - rafaelktistakis.linux
     - devsec.hardening
   roles:
-    - packages
+    - { role: packages, packages_install: "{{ packages_ganondorf }}" }
     - pisetup
     - starship
     - tmux
     - docker
-    - code-tunnel
+    - code-tunnel // TODO: refactor this role installation task to utilize the install.sh script
     # - os_hardening
     # - ssh_hardening
+  vars_files:
+    - config.yml
+    - vault.yml
+  vars:
+    - ansible_become_pass: '{{ su_password }}'
 
 
 - name: Setting up Pi Zero 2 / Ocarina - Fi
