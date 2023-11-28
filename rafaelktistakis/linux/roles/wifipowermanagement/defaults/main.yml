@@ -1,0 +1,5 @@
+---
+# defaults file for wifipowermanagement
+gateway: 192.168.1.254
+active: 1
+power: "off"
