@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 You can override the default packages installed through the ```packages``` variable of this role
+Set variable ```service_started``` in order to define whether the service should be on start state after the role installation and on each reboot
 
 Dependencies
 ------------
