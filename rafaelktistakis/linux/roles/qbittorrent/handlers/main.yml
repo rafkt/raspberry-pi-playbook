@@ -4,3 +4,4 @@
   systemd:
     name: qbittorrent.service
     state: restarted
+  when: '{{ service_started }}'
