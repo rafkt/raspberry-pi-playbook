@@ -21,14 +21,6 @@
     repo: 'https://github.com/tmux-plugins/tpm'
     dest: /home/{{ target_username }}/.tmux/plugins/tpm
 
-- name: Copy ssh rc
-  copy:
-    src: rc
-    dest: /home/{{ target_username }}/.ssh/rc
-    owner: "{{ target_username }}"                                                                              
-    group: "{{ target_username }}"                                                                              
-    mode: 0755
-
 - block:
   - name: Copy rpi-temp script for dracula tmux
     copy:
