@@ -45,8 +45,8 @@
 - name: Ensure the qBitTorrent service is running
   systemd:
     name: qbittorrent.service
-    enabled: true
-    state: started
+    enabled: '{{ service_started }}'
+    state: "{{ 'started' if service_started else 'stopped' }}"
 
 - name: Getting Dark Theme
   git:
@@ -63,9 +63,9 @@
     path: /home/qbittorrent/theme
     state: directory
     recurse: true
-#    owner: qbittorrent
-#    group: qbittorrent
-    mode: 0777
+    owner: qbittorrent
+    group: qbittorrent
+    mode: 0744
 
 - name: Set qBitTorrent settings
   copy:
