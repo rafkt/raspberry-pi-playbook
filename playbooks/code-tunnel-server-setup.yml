@@ -1,7 +1,12 @@
 ---
-- name: Installing Code Tunnel, self-hosted Server
-  shell: curl -fsSL https://code-server.dev/install.sh | sh
-  changed_when: false
+- name: Install Code Server package
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - code-server
 
 # Look codeserver script under include, for running the server
 # Current configuration should not be exposed to web as no-auth and no-cert has been configured
