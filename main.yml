@@ -13,6 +13,8 @@
     package: name=git state=present
   - name: Verify OpenSsh installation
     package: name=openssh-server state=present
+  - name: Print distribution version
+    debug: msg="{{ ansible_distribution_major_version }}"
 
 - name: Setting up Raspberry Pi / Pi
   hosts: pi
@@ -29,11 +31,12 @@
     - starship
     - tmux
     - homebridge
-    - qbittorrent
+    - { role: qbittorrent, service_started: true, set_settings: false }
     - usbc-gadget
     - docker
     - code-tunnel
     - fstab-umask-fix
+    - wifipowermanagement
     # - os_hardening
     # - ssh_hardening
   vars_files:
@@ -59,7 +62,10 @@
     - starship
     - tmux
     - docker
-    - code-tunnel // TODO: refactor this role installation task to utilize the install.sh script
+    - plex
+    - wifipowermanagement
+    - { role: qbittorrent, service_started: true, set_settings: false }
+    #- code-tunnel // TODO: refactor this role installation task to utilize the install.sh script
     # - os_hardening
     # - ssh_hardening
   vars_files:
