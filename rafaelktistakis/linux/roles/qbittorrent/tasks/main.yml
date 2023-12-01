@@ -5,8 +5,7 @@
     state: present
     update_cache: true
     name: "{{ packages }}"
-  register: installed
-
+  
 - name: Create qBitTorrent User
   user:
     name: qbittorrent
@@ -42,33 +41,24 @@
       WantedBy=multi-user.target
   notify: Restart the qBitTorrent service
 
-- name: Ensure the qBitTorrent service is running
+- name: Stop qBitTorrent service before applying settings
   systemd:
     name: qbittorrent.service
-    enabled: '{{ service_started }}'
-    state: "{{ 'started' if service_started else 'stopped' }}"
-
-- name: Getting Dark Theme
-  git:
-    clone: true
-    update: true
-    force: yes
-    repo: 'https://github.com/repslet/nightwalker.git'
-    dest: /home/qbittorrent/theme
-  when: installed.changed
-  notify: Restart the qBitTorrent service
-
-- name: Setting Theme permissions
-  file:
-    path: /home/qbittorrent/theme
-    state: directory
-    recurse: true
-    owner: qbittorrent
-    group: qbittorrent
-    mode: 0744
+    state: stopped
+  when: set_settings
 
 - name: Set qBitTorrent settings
   copy:
     src: qBittorrent.conf
     dest: /home/qbittorrent/.config/qBittorrent/qBittorrent.conf
+    owner: qbittorrent
+    group: qbittorrent
+    mode: 0644
+  when: set_settings
   notify: Restart the qBitTorrent service
+
+- name: Ensure the qBitTorrent service is running
+  systemd:
+    name: qbittorrent.service
+    enabled: "{{ service_started }}"
+    state: "{{ 'started' if service_started else 'stopped' }}"
