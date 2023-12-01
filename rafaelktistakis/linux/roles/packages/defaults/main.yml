@@ -32,3 +32,6 @@ packages_install:
 - libnss-mdns
 
 packages_remove:
+
+python_packages:
+- git-filter-repo
