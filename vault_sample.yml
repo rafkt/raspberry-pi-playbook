@@ -1,0 +1,8 @@
+# Sample Vault file
+# Set the variables below to hold your credentials
+# Rename to vault.yml
+# Run: ansible-vault encrypt vault.yml
+# The last command will encrypt your vault
+# Every execution of the main playbook will ask your vault password you used ot encrypt the vault.yml i.e. my_key
+# my_key is held in the session but not persisting between two sessions
+su_password: <xxxxx>
