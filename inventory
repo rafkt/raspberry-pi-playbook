@@ -1,2 +1,15 @@
+[all:vars]
+ansible_connection = ssh
+ansible_user = rafaelktistakis
+
 [pi]
 127.0.0.1 ansible_connection=local
+
+[fi]
+192.168.1.109 ansible_ssh_user='rafaelktistakis'
+
+[ocarina]
+192.168.1.155 ansible_ssh_user='rafaelktistakis'
+
+[ganondorf]
+192.168.1.213 ansible_ssh_user='rafaelktistakis'

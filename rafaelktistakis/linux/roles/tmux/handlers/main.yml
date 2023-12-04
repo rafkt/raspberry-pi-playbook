@@ -1,0 +1,5 @@
+---
+# handlers file for tmux
+- name: Reload Tmux
+  become_user: "{{ target_username }}"
+  shell: tmux source-file /home/{{ target_username }}/.tmux.conf && tmux kill-session

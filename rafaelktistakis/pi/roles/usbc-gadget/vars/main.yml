@@ -1,0 +1,13 @@
+---
+# vars file for usbc-gadget
+# Changes to be made to the config.txt file.
+config_txt_changes:
+  # Enable USB OTG mode.
+  - option: dtoverlay
+    value: dwc2
+  # Set frame buffer width.
+  - option: framebuffer_width
+    value: 1024
+  # Set frame buffer height.
+  - option: framebuffer_height
+    value: 768

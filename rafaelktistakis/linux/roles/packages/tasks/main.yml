@@ -1,0 +1,31 @@
+---
+# tasks file for packages
+- name: Upgrade all packages
+  apt:
+    name: '*'
+    update_cache: true
+    autoremove: true
+    state: latest
+
+- name: Install packages from list
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages_install }}"
+
+- name: Remove packages as configured
+  apt:
+    state: absent
+    update_cache: true
+    name: "{{ packages_remove }}"
+
+- name: Install Python packages (Debian 11)
+  pip:
+    name: "{{ python_packages }}"
+  when: ansible_distribution_major_version == "11"
+
+- name: Install Python packages (Debian 12)
+  pip:
+    name: "{{ python_packages }}"
+    extra_args: --break-system-packages
+  when: ansible_distribution_major_version == "12"

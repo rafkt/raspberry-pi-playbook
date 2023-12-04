@@ -1,0 +1,64 @@
+---
+# tasks file for qbittorrent
+- name: Install packages
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  
+- name: Create qBitTorrent User
+  user:
+    name: qbittorrent
+    state: present
+    system: true
+    create_home: true
+
+- name: Add {{ target_username }} to qBitTorrent group
+  user:
+    name: "{{ target_username }}"
+    append: true
+    groups: qbittorrent
+
+- name: Create qBitTorrent Service file
+  blockinfile:
+    path: /etc/systemd/system/qbittorrent.service
+    create: true
+    state: present
+    block: |
+      [Unit]
+      Description=BitTorrent Client
+      After=network.target
+      
+      [Service]
+      Type=forking
+      User=qbittorrent
+      Group=qbittorrent
+      UMask=002
+      ExecStart=/usr/bin/qbittorrent-nox -d --webui-port=8080
+      Restart=on-failure
+      
+      [Install]
+      WantedBy=multi-user.target
+  notify: Restart the qBitTorrent service
+
+- name: Stop qBitTorrent service before applying settings
+  systemd:
+    name: qbittorrent.service
+    state: stopped
+  when: set_settings
+
+- name: Set qBitTorrent settings
+  copy:
+    src: qBittorrent.conf
+    dest: /home/qbittorrent/.config/qBittorrent/qBittorrent.conf
+    owner: qbittorrent
+    group: qbittorrent
+    mode: 0644
+  when: set_settings
+  notify: Restart the qBitTorrent service
+
+- name: Ensure the qBitTorrent service is running
+  systemd:
+    name: qbittorrent.service
+    enabled: "{{ service_started }}"
+    state: "{{ 'started' if service_started else 'stopped' }}"

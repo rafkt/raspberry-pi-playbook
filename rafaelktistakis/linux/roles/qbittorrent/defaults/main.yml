@@ -1,0 +1,4 @@
+---
+# defaults file for qbittorrent
+service_started: true
+set_settings: false

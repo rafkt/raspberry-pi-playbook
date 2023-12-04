@@ -1,0 +1,10 @@
+---
+# vars file for pisetup
+#B1 cli, B2 cli autologin, B3 desktop, B4 desktop autologin
+BOOTBEHAVIOUR: B1
+
+users_shell_changes:
+  - option: rafaelktistakis
+    value: zsh
+  - option: root
+    value: bash

@@ -1,0 +1,8 @@
+---
+# vars file for fstab-umask-fix
+# External Drive Name to adjust fstab permissions - confirm before running
+disk_name: Zeus
+
+# External Drive path to mount in fstab. You can run 1. sudo fdisk -l and 2. sudo blkid prior to execution to confirm
+# More docs/ref at: https://miqu.me/blog/2015/01/14/tip-exfat-hdd-with-raspberry-pi/
+ext_drive: /dev/sda1

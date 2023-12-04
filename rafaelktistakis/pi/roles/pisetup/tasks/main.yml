@@ -1,0 +1,95 @@
+---
+# tasks file for pisetup
+- name: Snap packages
+  snap:
+    name:
+      - core
+      - snap-store
+      - btop
+    state: present
+    channel: latest/edge
+
+- name: Copy screenrc
+  copy:
+    src: screenrc
+    dest: /etc/screenrc
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Copy .xsessionrc
+  copy:
+    src: .xsessionrc
+    dest: /home/{{ target_username }}/.xsessionrc
+    owner: "{{ target_username }}"
+    group: "{{ target_username }}"
+    mode: 0755
+    backup: no
+
+- name: Copy .zshrc
+  copy:
+    src: .zshrc
+    dest: /home/{{ target_username }}/.zshrc
+    owner: "{{ target_username }}"
+    group: "{{ target_username }}"
+    mode: 0644
+    backup: yes
+
+- name: Copy Vnc quick command prompt
+  copy:
+    src: vnc.sh
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: 0755
+    backup: no
+
+- name: Copy isThrottled
+  copy:
+    src: isThrottled.sh
+    dest: /usr/local/bin/
+    owner: root
+    group: root
+    mode: 0755
+    backup: no
+
+- name: Copy Helper script to list all my helper scripts
+  copy:
+    src: list-helpers.sh
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: 0755
+    backup: no
+
+- name: change user shell to zsh 
+  user:
+    name: "{{ item.option }}"
+    shell: /bin/{{ item.value }}
+  with_items: '{{ users_shell_changes }}'
+
+- name: Get VNC behaviour
+  shell: raspi-config nonint get_vnc
+  register: vnc_flag
+  changed_when: false
+
+- name: Get Cli behaviour
+  shell: raspi-config nonint get_boot_cli
+  register: cli_flag
+  changed_when: false
+
+- name: Get Autologin behaviour
+  shell: raspi-config nonint get_autologin
+  register: autologin_flag
+  changed_when: false
+
+- name: Enable VNC
+  shell: "raspi-config nonint do_vnc 0"
+  when: not vnc_flag.stdout in '0'
+  notify: Reboot the machine
+
+- name: Set Boot behaviour
+  shell: raspi-config nonint do_boot_behaviour {{ BOOTBEHAVIOUR }}
+  when: not cli_flag.stdout ~ autologin_flag.stdout in bootbehaviour[BOOTBEHAVIOUR]
+  notify: Reboot the machine 

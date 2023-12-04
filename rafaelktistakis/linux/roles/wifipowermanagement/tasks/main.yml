@@ -1,0 +1,62 @@
+---
+# tasks file for wifipowermanagement
+- name: add power management option in /etc/rc.local
+  blockinfile:
+    path: /etc/rc.local
+    create: false
+    state: present
+    insertbefore: "exit 0"
+    block: |
+      {{ "/sbin/iwconfig wlan0 power " + power }}
+  notify: Reboot the machine
+
+- name: Check if monitorreboot options exist
+  blockinfile:
+    path: /root/monitorreboot.sh
+    create: true
+    state: present    
+    mode: 0755
+    block: |
+      {{ "ROUTER=" + gateway }}
+      {{ "TARGET_USER=" + target_username }}
+  check_mode: true
+  register: monitorreboot_out
+
+- name: Copy monitorreboot.sh into place.
+  copy:
+    src: monitorreboot.sh
+    dest: /root/monitorreboot.sh
+    owner: root
+    group: root
+    mode: 0755
+  when: monitorreboot_out.changed
+  notify: Reboot the machine
+
+- name: set gateway to monitor
+  blockinfile:
+    path: /root/monitorreboot.sh
+    create: false
+    state: present    
+    mode: 0755
+    block: |
+      {{ "ROUTER=" + gateway }}
+      {{ "TARGET_USER=" + target_username }}
+  notify: Reboot the machine
+
+- name: Cron "@reboot bash /root/monitorreboot.sh"
+  cron:
+    name: "job for monitor and reboot if default gateway is not reachable; running monitorreboot.sh"
+    special_time: reboot
+    job: "bash /root/monitorreboot.sh"
+    state: present
+  when: active == 1
+  notify: Reboot the machine
+
+- name: Cron "@reboot bash /root/monitorreboot.sh" removed
+  cron:
+    name: "job for monitor and reboot if default gateway is not reachable; running monitorreboot.sh"
+    special_time: reboot
+    job: "bash /root/monitorreboot.sh"
+    state: absent
+  when: active == 0
+  notify: Reboot the machine

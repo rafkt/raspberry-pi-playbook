@@ -1,0 +1,20 @@
+---
+# tasks file for starship
+- name: Check for Starship command
+  shell: command -v starship >/dev/null 2>&1
+  register: installed
+  ignore_errors: yes
+  changed_when: false
+
+- name: Installing Starship
+  shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
+  when: installed.rc != 0 or update == true
+  # Set role variable to install if variable is set to true e.g. update=true
+
+- name: Copy Starship preset
+  copy:
+    src: starship.toml
+    dest: /home/{{ target_username }}/.config/starship.toml
+    owner: "{{ target_username }}"
+    group: "{{ target_username }}"
+    mode: 0644

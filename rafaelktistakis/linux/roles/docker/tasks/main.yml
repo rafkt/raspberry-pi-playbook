@@ -1,0 +1,36 @@
+---
+# tasks file for docker
+# Configure APT to include Docker repository
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower}} stable
+    state: present
+
+- name: Install packages
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - docker-ce 
+    - docker-ce-cli 
+    - containerd.io 
+    - docker-buildx-plugin 
+    - docker-compose-plugin
+
+- name: Install Docker Module for Python (Debian 11)
+  pip:
+    name: docker 
+  when: ansible_distribution_major_version == "11"
+
+- name: Install Docker Module for Python (Debian 12)
+  pip:
+    name: docker
+    extra_args: --break-system-packages
+  when: ansible_distribution_major_version == "12"
