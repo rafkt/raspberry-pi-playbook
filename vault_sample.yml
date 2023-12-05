@@ -6,3 +6,7 @@
 # Every execution of the main playbook will ask your vault password you used ot encrypt the vault.yml i.e. my_key
 # my_key is held in the session but not persisting between two sessions
 su_password: <xxxxx>
+twingate_rafaelktistakis_spry_unicorn_access_token: <xxxxx>
+twingate_rafaelktistakis_spry_unicorn_refresh_token: <xxxxx> 
+twingate_rafaelktistakis_brilliant_ocelot_access_token: <xxxxx>
+twingate_rafaelktistakis_brilliant_ocelot_refresh_token: <xxxxx>
