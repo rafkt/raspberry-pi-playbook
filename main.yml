@@ -1,53 +1,53 @@
 ---
-- hosts: "{{ target }}"
-  become: yes
-  gather_facts: true
-  ignore_errors: yes
-  vars_files:
-    - config.yml
-    - vault.yml
-  vars:
-    - ansible_become_pass: '{{ su_password }}'
-  pre_tasks:
-  - name: verify git installation
-    package: name=git state=present
-  - name: Verify OpenSsh installation
-    package: name=openssh-server state=present
-  - name: Print distribution version
-    debug: msg="{{ ansible_distribution_major_version }}"
-
-- name: Setting up Raspberry Pi / Pi
-  hosts: pi
-  become: yes
-  collections:
-    - rafaelktistakis.pi
-    - rafaelktistakis.linux
-    - devsec.hardening
-  roles:
-    - packages
-    - pisetup
-    - overclock
-    - plex
-    - starship
-    - tmux
-    - homebridge
-    - { role: qbittorrent, service_started: true, set_settings: false }
-    - usbc-gadget
-    - docker
-    - code-tunnel
-    - fstab-umask-fix
-    - wifipowermanagement
-    # - os_hardening
-    # - ssh_hardening
-  vars_files:
-    - config.yml
-    - vault.yml
-  vars:
-    - ansible_become_pass: '{{ su_password }}'
-  pre_tasks:
-    - name: verify git installation
-      package: name=git state=present
-
+#- hosts: "{{ target }}"
+#  become: yes
+#  gather_facts: true
+#  ignore_errors: yes
+#  vars_files:
+#    - config.yml
+#    - vault.yml
+#  vars:
+#    - ansible_become_pass: '{{ su_password }}'
+#  pre_tasks:
+#  - name: verify git installation
+#    package: name=git state=present
+#  - name: Verify OpenSsh installation
+#    package: name=openssh-server state=present
+#  - name: Print distribution version
+#    debug: msg="{{ ansible_distribution_major_version }}"
+#
+#- name: Setting up Raspberry Pi / Pi
+#  hosts: pi
+#  become: yes
+#  collections:
+#    - rafaelktistakis.pi
+#    - rafaelktistakis.linux
+#    - devsec.hardening
+#  roles:
+#    - packages
+#    - pisetup
+#    - overclock
+#    - plex
+#    - starship
+#    - tmux
+#    - homebridge
+#    - { role: qbittorrent, service_started: true, set_settings: false }
+#    - usbc-gadget
+#    - docker
+#    - code-tunnel
+#    - fstab-umask-fix
+#    - wifipowermanagement
+#    # - os_hardening
+#    # - ssh_hardening
+#  vars_files:
+#    - config.yml
+#    - vault.yml
+#  vars:
+#    - ansible_become_pass: '{{ su_password }}'
+#  pre_tasks:
+#    - name: verify git installation
+#      package: name=git state=present
+#
 
 - name: Setting up Raspberry Pi 5
   hosts: ganondorf
@@ -57,14 +57,15 @@
     - rafaelktistakis.linux
     - devsec.hardening
   roles:
-    - { role: packages, packages_install: "{{ packages_ganondorf }}" }
-    - pisetup
-    - starship
-    - tmux
-    - docker
-    - plex
-    - wifipowermanagement
-    - { role: qbittorrent, service_started: true, set_settings: false }
+    - { role: twingate_connector, connector: twingate-spry-unicorn, network: rafaelktistakis, access_token: "{{ twingate_rafaelktistakis_spry_unicorn_access_token }}", refresh_token: "{{ twingate_rafaelktistakis_spry_unicorn_refresh_token }}"}
+    #    - { role: packages, packages_install: "{{ packages_ganondorf }}" }
+    #    - pisetup
+    #    - starship
+    #    - tmux
+    #    - docker
+    #    - plex
+    #    - wifipowermanagement
+    #    - { role: qbittorrent, service_started: true, set_settings: false }
     #- code-tunnel // TODO: refactor this role installation task to utilize the install.sh script
     # - os_hardening
     # - ssh_hardening
@@ -83,9 +84,29 @@
   collections:
     - rafaelktistakis.pi
     - rafaelktistakis.dietpi
+    - rafaelktistakis.linux
     - devsec.hardening
   roles:
     - dietpisetup
+  vars_files:
+    - config.yml
+    - vault.yml
+  vars:
+    - ansible_become_pass: '{{ su_password }}'
+
+
+- name: Setting up Pi Zero 2 / Fi
+  hosts: 
+    - fi
+  become: yes
+  collections:
+    - rafaelktistakis.pi
+    - rafaelktistakis.dietpi
+    - rafaelktistakis.linux
+    - devsec.hardening
+  roles:
+    - docker
+    - { role: twingate_connector, connector: twingate-brilliant-ocelot, network: rafaelktistakis, access_token: "{{ twingate_rafaelktistakis_brilliant_ocelot_access_token }}", refresh_token: "{{ twingate_rafaelktistakis_brilliant_ocelot_refresh_token }}"}
   vars_files:
     - config.yml
     - vault.yml
