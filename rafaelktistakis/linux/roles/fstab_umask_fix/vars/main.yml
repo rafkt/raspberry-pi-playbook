@@ -1,5 +1,5 @@
 ---
-# vars file for fstab-umask-fix
+# vars file for fstab_umask_fix
 # External Drive Name to adjust fstab permissions - confirm before running
 disk_name: Zeus
 
