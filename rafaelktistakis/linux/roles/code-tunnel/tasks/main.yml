@@ -1,23 +1,10 @@
 ---
 # tasks file for code-tunnel-server (Self-hosted)
 
-#  Revert this task to install through the guideline of 
-# https://coder.com/docs/code-server/latest/install#installsh
-# i.e. run 
-# curl -fsSL https://code-server.dev/install.sh | sh
-# Remove the package from Pi and re-install with the above command.
-- name: Install Code Server package
-  apt:
-    state: present
-    update_cache: true
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - code-server
-
-# Look codeserver script under files, for running the server
-# Current configuration should not be exposed to web as no-auth and no-cert has been configured
-# Only for local dev.
+- name: Install Code Server (through bash script)
+  shell: curl -fsSL https://code-server.dev/install.sh | sh
+  register: task_result
+  changed_when: "'Reusing' not in task_result.stdout"
 
 - name: Copy codeserver command prompt
   copy:
