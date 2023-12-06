@@ -1,17 +1,18 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+A role that spins up a docker container to accomodate twingate connectors. The role supports variable to accomodate seperate connectors under different networks within twingate.
 Run ```docker update --restart=no <MY-CONTAINER-ID>``` in case you would like to stop the connector from restarting.
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Docker and docker-compose need to be installed in the target system.
 
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Set the ```connector``` based on the twigate network connectors.
+The ```network``` accomodates the twingate networ accomodates the twingate network.
+The ```access_token``` and ```refresh_token``` are getting used to authenticate the connector with twingate's network. Those can be also set up in the vault. As such, they have been included in a vault_sample.yml within the root playbook that utilizes this role.
 
 Dependencies
 ------------
