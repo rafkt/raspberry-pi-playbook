@@ -3,6 +3,8 @@ Role Name
 
 A role that spins up a docker container to accomodate twingate connectors. The role supports variable to accomodate seperate connectors under different networks within twingate.
 Run ```docker update --restart=no <MY-CONTAINER-ID>``` in case you would like to stop the connector from restarting.
+If container fails to start ensure that there is no prior twingate container hanging on the target machine. Run ```docker ps -a``` to review all containers. Run ```docker rm -v `docker ps -a```` to remove all containers (if you really need this).
+
 Requirements
 ------------
 
