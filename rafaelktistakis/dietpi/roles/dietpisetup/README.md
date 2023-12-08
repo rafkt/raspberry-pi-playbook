@@ -10,13 +10,15 @@ OpenSsh & a valid user with pass defined in the vault.
 
 Role Variables
 --------------
+For setting the headless behaviour, set the ```enable_headless``` to 1 or 0 respectively.
+The swap size is set through the ```swap_size``` in MB.
+To have the boot behaviour on having console to autostart (without user interface), set the ```console_autostart``` to 0. Alternatively, set it to 7 for console autologin behaviour. The ```console_autologin``` holds the value 7 in the defaults, so one could set the ```console_autologin``` into ```console_autostart```.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role is tightly coupled with the dietpi-config untilities offerred under a dietpi distribution. The aim is to automate such configuration to dietpi which can enable a headless setup. 
 
 Example Playbook
 ----------------
