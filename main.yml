@@ -34,7 +34,7 @@
     - { role: qbittorrent, service_started: true, set_settings: false }
     - usbc-gadget
     - docker
-    - code-tunnel
+    - code_tunnel
     - fstab_umask_fix
     - wifipowermanagement
     # - os_hardening
@@ -66,7 +66,7 @@
     - plex
     - wifipowermanagement
     - { role: qbittorrent, service_started: true, set_settings: false }
-    #- code-tunnel // TODO: refactor this role installation task to utilize the install.sh script
+    - code_tunnel
     #- os_hardening
     #- ssh_hardening
   vars_files:

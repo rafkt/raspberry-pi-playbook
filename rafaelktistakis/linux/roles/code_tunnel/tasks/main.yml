@@ -1,5 +1,5 @@
 ---
-# tasks file for code-tunnel-server (Self-hosted)
+# tasks file for code_tunnel server (Self-hosted)
 
 - name: Install Code Server (through bash script)
   shell: curl -fsSL https://code-server.dev/install.sh | sh
