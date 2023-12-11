@@ -62,12 +62,13 @@
     - starship
     - tmux
     - docker
+    - { role: twingate_connector, connector: twingate-spry-unicorn, network: rafaelktistakis, access_token: "{{ twingate_rafaelktistakis_spry_unicorn_access_token }}", refresh_token: "{{ twingate_rafaelktistakis_spry_unicorn_refresh_token }}"}
     - plex
     - wifipowermanagement
     - { role: qbittorrent, service_started: true, set_settings: false }
     #- code-tunnel // TODO: refactor this role installation task to utilize the install.sh script
-    # - os_hardening
-    # - ssh_hardening
+    #- os_hardening
+    #- ssh_hardening
   vars_files:
     - config.yml
     - vault.yml
@@ -76,16 +77,36 @@
 
 
 - name: Setting up Pi Zero 2 / Ocarina - Fi
-  hosts: 
+  hosts:
     - ocarina
     - fi
   become: yes
   collections:
     - rafaelktistakis.pi
     - rafaelktistakis.dietpi
+    - rafaelktistakis.linux
     - devsec.hardening
   roles:
     - dietpisetup
+  vars_files:
+    - config.yml
+    - vault.yml
+  vars:
+    - ansible_become_pass: '{{ su_password }}'
+
+
+- name: Setting up Pi Zero 2 / Fi
+  hosts: 
+    - fi
+  become: yes
+  collections:
+    - rafaelktistakis.pi
+    - rafaelktistakis.dietpi
+    - rafaelktistakis.linux
+    - devsec.hardening
+  roles:
+    - docker
+    - { role: twingate_connector, connector: twingate-brilliant-ocelot, network: rafaelktistakis, access_token: "{{ twingate_rafaelktistakis_brilliant_ocelot_access_token }}", refresh_token: "{{ twingate_rafaelktistakis_brilliant_ocelot_refresh_token }}"}
   vars_files:
     - config.yml
     - vault.yml

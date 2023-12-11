@@ -23,14 +23,18 @@
     - containerd.io 
     - docker-buildx-plugin 
     - docker-compose-plugin
+    - docker-compose
+  notify: Reboot the machine 
 
 - name: Install Docker Module for Python (Debian 11)
   pip:
     name: docker 
   when: ansible_distribution_major_version == "11"
+  notify: Reboot the machine
 
 - name: Install Docker Module for Python (Debian 12)
   pip:
     name: docker
     extra_args: --break-system-packages
   when: ansible_distribution_major_version == "12"
+  notify: Reboot the machine

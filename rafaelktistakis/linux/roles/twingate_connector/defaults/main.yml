@@ -1,0 +1,7 @@
+---
+# defaults file for twingate_connector
+connector: twingate-spry-unicorn
+network: rafaelktistakis
+access_token: xxx
+refresh_token: xxx
+

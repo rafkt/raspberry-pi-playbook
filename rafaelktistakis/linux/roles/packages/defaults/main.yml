@@ -35,3 +35,4 @@ packages_remove:
 
 python_packages:
 - git-filter-repo
+- cython

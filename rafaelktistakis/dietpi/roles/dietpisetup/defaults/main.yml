@@ -1,7 +1,7 @@
 ---
 # defaults file for dietpisetup
 enable_headless: 1
-disable_headless: 0
 swap_size: 8192
 console_autostart: 0
 console_autologin: 7
+ntpd_mode: 4
