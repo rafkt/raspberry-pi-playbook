@@ -35,7 +35,7 @@
     - usbc-gadget
     - docker
     - code-tunnel
-    - fstab-umask-fix
+    - fstab_umask_fix
     - wifipowermanagement
     # - os_hardening
     # - ssh_hardening

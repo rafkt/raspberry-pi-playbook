@@ -1,5 +1,5 @@
 ---
-# tasks file for fstab-umask-fix
+# tasks file for fstab_umask_fix
 - name: Getting UUID of external drive
   shell: blkid -s UUID -o value {{ ext_drive }}
   register: blkid_out
