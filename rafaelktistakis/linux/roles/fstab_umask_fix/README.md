@@ -2,6 +2,11 @@ Role Name
 =========
 
 A brief description of the role goes here.
+Useful comments to confirm the role variables.
+```lsblk```,
+```blkid```,
+```fdisk -l```
+
 
 Requirements
 ------------
