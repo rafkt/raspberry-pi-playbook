@@ -1,7 +1,4 @@
 ---
-# tasks file for homebridge
-# After installation, complete configuration in 
-# http://<ip address of your server>:8581
 - name: Add Homebridge GPG apt Key
   apt_key:
     url: https://repo.homebridge.io/KEY.gpg

@@ -1,8 +1,8 @@
 Home Brdige
 =========
 
-Settting up Home bridge role
-
+Settting up Home bridge role. After installation, complete configuration in http://<ip address of your server>:8581.
+-
 Requirements
 ------------
 
