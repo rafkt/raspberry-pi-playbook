@@ -2,7 +2,14 @@ Home Brdige
 =========
 
 Settting up Home bridge role. After installation, complete configuration in http://<ip address of your server>:8581.
--
+
+Currently supporting plugins for Nest & Wiz accessories.
+Configuration turorials can be found under:
+- https://practicalhomekit.blogspot.com/2021/09/setting-up-nest-via-homebridge-in.html
+- https://github.com/chrisjshull/homebridge-nest#readme
+- https://github.com/kpsuperplane/homebridge-wiz-lan
+
+
 Requirements
 ------------
 

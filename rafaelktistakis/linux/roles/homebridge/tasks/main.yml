@@ -21,3 +21,9 @@
   changed_when: "'up to date' not in task_result.stdout"
   notify: Restart Home Bridge
 
+# pending to add
+# 1. update / add plugin hombredge-ui, is it done as part of the overall apt package installation of homebreidge ? 
+# 2. export scedugle of a backup. Given a file have a task to import during installation, if variable set.
+# 3. Update docs based on the above
+# 4. Finally migrate hombebridge to Ganondorf once the above are complete
+# Check the link https://www.reddit.com/r/homebridge/comments/drkrxt/nest_eco_mode/ 
