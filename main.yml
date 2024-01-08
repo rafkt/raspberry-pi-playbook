@@ -35,7 +35,6 @@
     - usbc-gadget
     - docker
     - code_tunnel
-    - fstab_umask_fix # Role should be removed based on the backlog task to migrate this to Pi-5/Ganondorf. Role has already been executed to Ganondorf
     - wifipowermanagement
     # - os_hardening
     # - ssh_hardening
