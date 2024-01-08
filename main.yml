@@ -31,7 +31,7 @@
     - starship
     - tmux
     - homebridge
-    - { role: qbittorrent, service_started: true, set_settings: false }
+    - { role: qbittorrent, service_started: false, set_settings: false }
     - usbc-gadget
     - docker
     - code_tunnel
