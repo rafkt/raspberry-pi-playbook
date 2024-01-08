@@ -1,17 +1,27 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role sets up a cron job to update a Cloudfare DNS record (A type, but also configurable), with the host's IP. The update is done through REST request every 5 minutes.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+N/A
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The list of variables you can set are:
+
+```domain_name```, ```domain_type```, ```zone_id```, ```record_id```, ```auth_email``` & ```bearer_token```.
+
+Below command is to be used to get current list of DNS records under the zone identifier. Zone identifier obtained through the portal.
+ 
+> curl --request GET \
+  --url https://api.cloudflare.com/client/v4/zones/zone_identifier/dns_records \
+  --header 'Content-Type: application/json' \
+  --header 'X-Auth-Email: '
+
 
 Dependencies
 ------------

@@ -37,11 +37,4 @@ conn.request("PATCH", "/client/v4/zones/" + zoneId +"/dns_records/" + recordId, 
 res = conn.getresponse()
 data = res.read()
 
-print(data.decode("utf-8")) 
-
-
-# Below command is to be used to get current list of DNS records under the zone identifier. Zone identifier obtained through the portal
-# curl --request GET \
-#  --url https://api.cloudflare.com/client/v4/zones/zone_identifier/dns_records \
-#  --header 'Content-Type: application/json' \
-#  --header 'X-Auth-Email: '
+print(data.decode("utf-8"))
