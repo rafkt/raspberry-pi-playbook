@@ -10,3 +10,8 @@ twingate_rafaelktistakis_spry_unicorn_access_token: <xxxxx>
 twingate_rafaelktistakis_spry_unicorn_refresh_token: <xxxxx> 
 twingate_rafaelktistakis_brilliant_ocelot_access_token: <xxxxx>
 twingate_rafaelktistakis_brilliant_ocelot_refresh_token: <xxxxx>
+cloudflare_ddns_domain_name: '"<xxxxx>"'
+cloudflare_ddns_zone_id: '"<xxxxx>"'
+cloudflare_ddns_record_id: '"<xxxxx>"'
+cloudflare_ddns_auth_email: '"<xxxxx>"'
+cloudflare_ddns_bearer_token: '"<xxxxx>"'
