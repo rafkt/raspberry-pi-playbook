@@ -1,0 +1,56 @@
+---
+# tasks file for ddns_provider_ip_update
+- name: Check if cloudflare_DDNS.py options exist
+  blockinfile:
+    path: /root/cloudflare_DDNS.py
+    create: true
+    state: present    
+    mode: 0755
+    block: |
+      {{ "domainName = " + domain_name }}
+      {{ "domainType = " + domain_type }}
+      {{ "zoneId = " + zone_id }}
+      {{ "recordId = " + record_id }}
+      {{ "authEmail = " + auth_email }}
+      {{ "bearerToken = " + bearer_token }}
+  check_mode: true
+  register: ddns_provider_ip_update_out
+
+- name: Copy cloudflare_DDNS.py into place.
+  copy:
+    src: cloudflare_DDNS.py
+    dest: /root/cloudflare_DDNS.py
+    owner: root
+    group: root
+    mode: 0755
+  when: ddns_provider_ip_update_out.changed
+
+- name: set provider credentials
+  blockinfile:
+    path: /root/cloudflare_DDNS.py
+    create: false
+    state: present
+    mode: 0755
+    block: |
+      {{ "domainName = " + domain_name }}
+      {{ "domainType = " + domain_type }}
+      {{ "zoneId = " + zone_id }}
+      {{ "recordId = " + record_id }}
+      {{ "authEmail = " + auth_email }}
+      {{ "bearerToken = " + bearer_token }}
+
+- name: Cron "*/5 * * * * python3 /root/cloudflare_DDNS.py"
+  cron:
+    name: "job for updating host IP every 5mins; running cloudflare_DDNS.py"
+    minute: "*/5"
+    job: "/bin/python3 /root/cloudflare_DDNS.py"
+    state: present
+  when: active == 1
+
+- name: Cron "*/5 * * * * python3 /root/cloudflare_DDNS.py"
+  cron:
+    name: "job for updating host IP every 5mins; running cloudflare_DDNS.py"
+    minute: "*/5"
+    job: "/bin/python3 /root/cloudflare_DDNS.py"
+    state: absent
+  when: active == 0
