@@ -2,6 +2,7 @@
 # This cheatsheet ommits the most basic shortcuts
 
 CTL-H / CTL-L : switch back/forth to NeoTree or open windows
+H / L : switch back/forth to NeoTree or open tab within the window
 
 ## WORD JUMPS
 
