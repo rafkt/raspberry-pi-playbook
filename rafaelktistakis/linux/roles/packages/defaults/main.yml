@@ -30,6 +30,7 @@ packages_install:
 - avahi-dnsconfd
 - avahi-discover
 - libnss-mdns
+- neofetch
 
 packages_remove:
 
