@@ -1,0 +1,36 @@
+---
+# tasks file for nvme_setup
+
+# full upgrade apt task
+# 1. sudo apt-get update
+# 2. sudo apt-get full-upgrade (in ansible use the apt module with upgrade:full option)
+
+# boot/config.txt entry to activate nvme. Use block in file. Remove existing entry
+# add the value below under the [all]
+# dtparam=pciex1_gen=3
+
+# sudo raspi-config nonint do_boot_order <B1/B2/B3>
+# You would need the B2 option for Pi-5 to prioritise NVME over USB/SD (more info at: www.raspberrypi.com/documentation/computers/configuration.html)
+
+
+# Notify restart handler
+# rpi-clone does not seem to work. A fresh install seems to work though. Any alternatives ?  Just tried sd copier from pi os. When choosing to create new PARTUUID, was able to just boot into the nvme. Mindful I have boot order B1.
+
+# try to remove the PCIE_PROBE=1 as it might not required.REMOVED.TESTED and confirmed as not required.
+# 
+# 
+# https://shop.pimoroni.com/products/nvme-base?variant=41219587178579
+# 
+# https://www.jeffgeerling.com/blog/2023/nvme-ssd-boot-raspberry-pi-5
+# 
+# (I have already adjusted boot/config.txt) — remove/edit existing before doing so with Ansible
+# 
+# you require:
+#  1. sudo apt-get update
+#  2. sudo apt-get full-upgrade (in ansible use the apt module with upgrade:full option)
+# 
+# The above is to update to latest firmware
+# 
+# sudo raspi-config nonint do_boot_order <B1/B2/B3>
+# You would need the B2 option for Pi-5 to prioritise NVME over USB/SD (more info at: www.raspberrypi.com/documentation/computers/configuration.html)
+# B1 is ok as well as I can always pop a card in and prioritize over the SD card. If card is missing then it goes into NVME
