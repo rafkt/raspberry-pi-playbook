@@ -1,5 +1,6 @@
 ---
 - hosts: "{{ target }}"
+  tags: all
   become: yes
   gather_facts: true
   ignore_errors: yes
@@ -17,6 +18,7 @@
     debug: msg="{{ ansible_distribution_major_version }}"
 
 - name: Setting up Raspberry Pi / Pi
+  tags: [all, pi]
   hosts: pi
   become: yes
   collections:
@@ -47,8 +49,8 @@
     - name: verify git installation
       package: name=git state=present
 
-
 - name: Setting up Raspberry Pi 5
+  tags: [all, ganondorf]
   hosts: ganondorf
   become: yes
   collections:
@@ -76,8 +78,8 @@
   vars:
     - ansible_become_pass: '{{ su_password }}'
 
-
 - name: Setting up Pi Zero 2 / Ocarina - Fi
+  tags: [all, pi_zero]
   hosts:
     - ocarina
     - fi
@@ -95,8 +97,8 @@
   vars:
     - ansible_become_pass: '{{ su_password }}'
 
-
 - name: Setting up Pi Zero 2 / Fi
+  tags: [all, fi]
   hosts: 
     - fi
   become: yes
