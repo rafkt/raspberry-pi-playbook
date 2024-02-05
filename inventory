@@ -13,3 +13,9 @@ ansible_user = rafaelktistakis
 
 [ganondorf]
 192.168.1.213 ansible_ssh_user='rafaelktistakis'
+
+[imac]
+192.168.1.160 ansible_ssh_user='rafaelktistakis'
+
+[macbook]
+192.168.1.80 ansible_ssh_user='rafaelktistakis'
