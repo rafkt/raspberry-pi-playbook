@@ -35,3 +35,11 @@ packages_ganondorf:
 - avahi-dnsconfd
 - avahi-discover
 - libnss-mdns
+- neofetch
+- mc
+
+packages_macintosh:
+
+packages_imac:
+
+packages_macbook:
