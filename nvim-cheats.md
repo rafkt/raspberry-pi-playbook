@@ -4,6 +4,11 @@
 CTL-H / CTL-L : switch back/forth to NeoTree or open windows
 H / L : switch back/forth to NeoTree or open tab within the window
 
+## TERMINAL
+
+<CTL>-/ : will open a floating terminal
+<space> <f> <T> : will open a floating terminal
+
 ## WORD JUMPS
 
 e / b : in NORMAL mode move at word end
