@@ -7,6 +7,21 @@ Uninstall removed plugins by ctl-T alt-U
 Update plugins by ctl-T U
 Note ctl-T is the current defined Tmux prefix for command. Align if you change this. 
 
+Could improve this role by installing the latest through this playbook as:
+- wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz (or latest) or git clone https://github.com/tmux/tmux.git && cd tmux && sh autogen.sh
+- sudo apt install libevent-dev
+- sudo apt install libncurses-dev
+
+Both of the above are the dependencies required.
+Then: 
+- ./configure
+- make
+- sudo make install
+- remove the apt tmux package if had been installed
+- Add some nice new features like:
+    bind -n M-g display-popup -E "tmux new-session -A -s popup"
+    you can bind different keys with different popup terminals under different positions with different startup commands
+
 Requirements
 ------------
 
