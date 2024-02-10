@@ -9,6 +9,8 @@ target:
 target_username: rafaelktistakis
 
 packages_ganondorf:
+- build-essential
+- libssl-dev
 - screen
 - tmux
 - alpine

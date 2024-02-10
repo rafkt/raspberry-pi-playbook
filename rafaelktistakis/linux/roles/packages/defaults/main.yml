@@ -1,6 +1,8 @@
 ---
 # defaults file for packages
 packages_install:
+- build-essential
+- libssl-dev
 - screen
 - alpine
 - tmux
