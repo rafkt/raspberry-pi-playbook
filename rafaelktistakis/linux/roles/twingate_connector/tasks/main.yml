@@ -12,13 +12,12 @@
         twingate_connector:
           container_name: "{{ connector }}" 
           restart: always
-          image: "twingate/connector:latest"
+          image: "twingate/connector:1.63.0"
           environment:
-            - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-            - TWINGATE_API_ENDPOINT=/connector.stock
             - "TWINGATE_NETWORK={{ network }}"
             - "TWINGATE_ACCESS_TOKEN={{ access_token }}"
             - "TWINGATE_REFRESH_TOKEN={{ refresh_token }}"
+            - TWINGATE_LOG_ANALYTICS=v2
             - TWINGATE_LOG_LEVEL=3
           sysctls:
             net.ipv4.ping_group_range: "0 2147483647"
