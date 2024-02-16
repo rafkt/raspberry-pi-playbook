@@ -37,6 +37,7 @@
       owner: "{{ target_username }}"
       group: "{{ target_username }}"
       mode: 0755
+  when: install_rpi_scripts == true
   rescue:
   - name: Print custom message before failing the host
     fail:

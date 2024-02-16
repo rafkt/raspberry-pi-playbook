@@ -30,6 +30,7 @@ N/A
 Role Variables
 --------------
 
+You can pass ```true``` or ```false``` to the ```install_rpi_scripts``` variable to install or uninstall the rpi scripts. The default is ```true```.
 
 
 Dependencies

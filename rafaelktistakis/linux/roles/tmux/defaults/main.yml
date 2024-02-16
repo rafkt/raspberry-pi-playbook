@@ -1,2 +1,3 @@
 ---
 # defaults file for tmux
+install_rpi_scripts: true
