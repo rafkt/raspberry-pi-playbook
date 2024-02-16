@@ -1,41 +1,5 @@
 ---
 # tasks file for pisetup
-- name: Snap packages
-  snap:
-    name:
-      - core
-      - snap-store
-      - btop
-    state: present
-    channel: latest/edge
-
-- name: Copy screenrc
-  copy:
-    src: screenrc
-    dest: /etc/screenrc
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-
-- name: Copy .xsessionrc
-  copy:
-    src: .xsessionrc
-    dest: /home/{{ target_username }}/.xsessionrc
-    owner: "{{ target_username }}"
-    group: "{{ target_username }}"
-    mode: 0755
-    backup: no
-
-- name: Copy .zshrc
-  copy:
-    src: .zshrc
-    dest: /home/{{ target_username }}/.zshrc
-    owner: "{{ target_username }}"
-    group: "{{ target_username }}"
-    mode: 0644
-    backup: yes
-
 - name: Copy Vnc quick command prompt
   copy:
     src: vnc.sh
@@ -62,12 +26,6 @@
     group: root
     mode: 0755
     backup: no
-
-- name: change user shell to zsh 
-  user:
-    name: "{{ item.option }}"
-    shell: /bin/{{ item.value }}
-  with_items: '{{ users_shell_changes }}'
 
 - name: Get VNC behaviour
   shell: raspi-config nonint get_vnc
