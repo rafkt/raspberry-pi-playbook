@@ -13,8 +13,6 @@ packages_install:
 - git
 - at
 - dnsmasq
-- exfat-fuse
-- exfat-utils
 - unrar
 - zsh
 - apt-transport-https
