@@ -1,0 +1,7 @@
+---
+# vars file for general_setup
+users_shell_changes:
+  - option: rafaelktistakis
+    value: zsh
+  - option: root
+    value: bash

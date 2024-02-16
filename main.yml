@@ -29,6 +29,7 @@
     - packages
     - { role: packages, packages_install: "{{ packages_pi_os }}" }
     - pisetup
+    - general_setup
     - overclock
     - plex
     - starship
@@ -62,6 +63,7 @@
     - { role: packages }
     - { role: packages, packages_install: "{{ packages_pi_os }}" }
     - pisetup
+    - general_setup
     - starship
     - tmux
     - docker
@@ -129,11 +131,12 @@
     - rafaelktistakis.linux
     - devsec.hardening
   roles:
+    - general_setup
     - { role: packages }
     - { role: microsoft_vscode }
-    #- starship
-    #- tmux
-    #- docker
+    - starship
+    - { role: tmux, install_rpi_scripts: false }
+    - docker
     #- os_hardening
     #- ssh_hardening
   vars_files:
@@ -180,5 +183,3 @@
     - vault.yml
   vars:
     - ansible_become_pass: '{{ su_password }}'
-
-
