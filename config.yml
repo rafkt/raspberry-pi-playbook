@@ -8,37 +8,10 @@ target:
 # User some changes will be applied to, e.g. zshrc configuration, permissions etc. 
 target_username: rafaelktistakis
 
-packages_ganondorf:
-- build-essential
-- libssl-dev
-- screen
-- tmux
-- alpine
-- vim
+packages_pi_os:
 - code
-- mosh
-- snapd
-- git
-- at
-- dnsmasq
-- unrar
-- zsh
-- apt-transport-https
-- ca-certificates
-- curl
-- software-properties-common
-- python3-pip
-- virtualenv
-- python3-setuptools
-- fonts-firacode
-- sshpass
-- avahi-daemon
-- avahi-utils
-- avahi-dnsconfd
-- avahi-discover
-- libnss-mdns
-- neofetch
-- mc
+
+packages_ganondorf:
 
 packages_macintosh:
 

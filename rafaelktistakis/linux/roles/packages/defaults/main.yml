@@ -4,10 +4,9 @@ packages_install:
 - build-essential
 - libssl-dev
 - screen
-- alpine
 - tmux
 - vim
-- code
+- alpine
 - mosh
 - snapd
 #- etckeeper

@@ -27,6 +27,7 @@
     - devsec.hardening
   roles:
     - packages
+    - { role: packages, packages_install: "{{ packages_pi_os }}" }
     - pisetup
     - overclock
     - plex
@@ -58,7 +59,8 @@
     - rafaelktistakis.linux
     - devsec.hardening
   roles:
-    - { role: packages, packages_install: "{{ packages_ganondorf }}" }
+    - { role: packages }
+    - { role: packages, packages_install: "{{ packages_pi_os }}" }
     - pisetup
     - starship
     - tmux
@@ -128,9 +130,10 @@
     - devsec.hardening
   roles:
     - { role: packages }
-    - starship
-    - tmux
-    - docker
+    - { role: microsoft_vscode }
+    #- starship
+    #- tmux
+    #- docker
     #- os_hardening
     #- ssh_hardening
   vars_files:
