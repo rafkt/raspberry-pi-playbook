@@ -8,10 +8,13 @@ target:
 # User some changes will be applied to, e.g. zshrc configuration, permissions etc. 
 target_username: rafaelktistakis
 
-packages_pi_os:
+packages_pi_os_bullseye:
 - code
 - exfat-fuse
 - exfat-utils
+
+packages_pi_os_bookworm:
+- code
 
 packages_ganondorf:
 
