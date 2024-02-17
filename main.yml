@@ -74,7 +74,8 @@
     - wifipowermanagement
     - { role: qbittorrent, service_started: true, set_settings: false }
     - code_tunnel
-    - fstab_umask_fix
+    # to remove the fstab role as disk has been disconnected
+    # - fstab_umask_fix
     #- os_hardening
     #- ssh_hardening
   vars_files:
