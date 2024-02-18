@@ -1,0 +1,27 @@
+---
+# tasks file for mosquitto
+
+- name: Install packages (Mosquitto)
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - mosquitto 
+    - mosquitto-clients
+
+- name: Copy moscquitto.conf
+  copy:
+    src: mosquitto.conf
+    dest: /etc/mosquitto/conf.d/mosquitto.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Mosquitto service
+
+- name: Start and enable mosquitto service
+  service:
+    name: mosquitto
+    state: started
+    enabled: true

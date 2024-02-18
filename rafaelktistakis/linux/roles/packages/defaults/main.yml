@@ -31,6 +31,7 @@ packages_install:
 - libnss-mdns
 - neofetch
 - mc
+- mosquitto-clients
 
 packages_remove:
 
