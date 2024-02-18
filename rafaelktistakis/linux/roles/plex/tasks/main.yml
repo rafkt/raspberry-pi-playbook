@@ -24,3 +24,10 @@
     name: plexmediaserver
     state: started
     enabled: true
+
+- name: Add Plex user to qBitTorrent group
+  user:
+    name: plex
+    append: true
+    groups: qbittorrent
+  notify: Restart the plex service
