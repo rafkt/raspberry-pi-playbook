@@ -1,0 +1,4 @@
+---
+# vars file for flatpak
+flatpak_apps:
+- com.plexamp.Plexamp

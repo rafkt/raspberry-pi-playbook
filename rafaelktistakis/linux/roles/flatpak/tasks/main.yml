@@ -1,0 +1,44 @@
+---
+# tasks file for flatpak
+
+- name: Install flatpak packages
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - flatpak
+
+- name: Install flatpak backend packages (if option selected)
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gnome-software-plugin-flatpak
+  when: install_gnome_backend==true
+
+- name: Install flatpak backend packages (if option selected)
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - plasma-discover-backend-flatpak
+  when: install_kde_backend==true
+
+- name: Add flathub repository for {{ target_username }}
+  become_user: "{{ target_username }}"
+  shell: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  changed_when: false
+
+- name: Install flatpak apps
+  become_user: "{{ target_username }}"
+  shell: flatpak install flathub {{ item }}
+  with_items: "{{ flatpak_apps }}"
+  register: task_result
+  changed_when: "'Skipping' not in task_result.stderr"
+ 

@@ -1,0 +1,4 @@
+---
+# defaults file for flatpak
+install_gnome_backend: false
+install_kde_backend: false

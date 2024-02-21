@@ -72,7 +72,7 @@
     - plex
     - wifipowermanagement
     - { role: qbittorrent, service_started: true, set_settings: false }
-    - code_tunnel
+    - code_tunnel 
     # to remove the fstab role as disk has been disconnected
     # - fstab_umask_fix
     #- os_hardening
@@ -178,6 +178,7 @@
     - plex
     - { role: qbittorrent, service_started: true, set_settings: false }
     - code_tunnel
+    - { role: flatpak, install_kde_backend: true }
     #- os_hardening
     #- ssh_hardening
   vars_files:
