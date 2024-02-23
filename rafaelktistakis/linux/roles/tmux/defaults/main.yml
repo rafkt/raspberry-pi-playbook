@@ -1,3 +1,4 @@
 ---
 # defaults file for tmux
+tmux_version: "3.4"
 install_rpi_scripts: true

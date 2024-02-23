@@ -4,7 +4,6 @@ packages_install:
 - build-essential
 - libssl-dev
 - screen
-- tmux
 - vim
 - alpine
 - mosh

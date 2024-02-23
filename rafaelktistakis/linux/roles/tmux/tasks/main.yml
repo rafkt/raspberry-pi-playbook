@@ -1,7 +1,73 @@
 ---
 # tasks file for tmux
-- name: Verify tmux installation.
-  package: name=tmux state=present
+
+# Could improve this role by installing the latest through this playbook as:
+#- wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz (or latest) or git clone https://github.com/tmux/tmux.git && cd tmux && sh autogen.sh
+#- sudo apt install libevent-dev
+#- sudo apt install libncurses-dev
+#
+#Both of the above are the dependencies required.
+#Then: 
+#- ./configure
+#- make
+#- sudo make install
+#-
+
+- name: Install package dependencies
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - libevent-dev
+    - libncurses-dev 
+    - bison
+
+- name: Check for Tmux existing installation (if any)
+  shell: command -v tmux -V >/dev/null 2>&1
+  register: installed
+  ignore_errors: yes
+  changed_when: false
+
+- name: Check current version of tmux 
+  shell: tmux -V
+  register: current_tmux_version
+  changed_when: false
+
+- name: Download Tmux source into /tmp
+  get_url:
+    url: https://github.com/tmux/tmux/releases/download/{{ tmux_version }}/tmux-{{ tmux_version }}.tar.gz
+    dest: /tmp/tmux-{{ tmux_version }}.tar.gz
+    mode: 0777
+  when: tmux_version not in current_tmux_version.stdout 
+
+- name: Extract source archive into /tmp
+  unarchive:
+    src: /tmp/tmux-{{ tmux_version }}.tar.gz
+    dest: /tmp
+    creates: /tmp/tmux-{{ tmux_version }}
+    remote_src: yes
+    mode: 0777
+  when: tmux_version not in current_tmux_version.stdout 
+
+- name: Configure
+  shell:
+    cmd: ./configure
+    chdir: /tmp/tmux-{{ tmux_version }}
+    creates: Makefile
+  when: tmux_version not in current_tmux_version.stdout
+
+- name: Build the default target
+  make:
+    chdir: /tmp/tmux-{{ tmux_version }}
+  when: tmux_version not in current_tmux_version.stdout
+
+- name: Run 'install' target as root
+  make:
+    chdir: /tmp/tmux-{{ tmux_version }}
+    target: install
+  when: tmux_version not in current_tmux_version.stdout
 
 - name: Copy Tmux conf
   copy:

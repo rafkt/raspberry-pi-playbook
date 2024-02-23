@@ -33,7 +33,7 @@
     - overclock
     - plex
     - starship
-    - tmux
+    - { role: tmux, tmux_version: "3.4", install_rpi_scripts: true }
     - homebridge
     - { role: qbittorrent, service_started: false, set_settings: false }
     - usbc-gadget
@@ -65,7 +65,7 @@
     - pisetup
     - general_setup
     - starship
-    - tmux
+    - { role: tmux, tmux_version: "3.4", install_rpi_scripts: true }
     - docker
     - { role: twingate_connector, connector: twingate-spry-unicorn, network: rafaelktistakis, access_token: "{{ twingate_rafaelktistakis_spry_unicorn_access_token }}", refresh_token: "{{ twingate_rafaelktistakis_spry_unicorn_refresh_token }}" }
     - { role: ddns_provider_ip_update, active: 1, domain_name:  "{{ cloudflare_ddns_domain_name }}", domain_type: '"A"', zone_id: "{{ cloudflare_ddns_zone_id }}", record_id: "{{ cloudflare_ddns_record_id }}", auth_email: "{{ cloudflare_ddns_auth_email }}", bearer_token: "{{ cloudflare_ddns_bearer_token }}" }
@@ -137,7 +137,7 @@
     - { role: packages }
     - { role: microsoft_vscode }
     - starship
-    - { role: tmux, install_rpi_scripts: false }
+    - { role: tmux, tmux_version: "3.4", install_rpi_scripts: false }
     - docker
     #- os_hardening
     #- ssh_hardening
