@@ -1,0 +1,36 @@
+---
+# tasks file for samba
+
+- name: Install packages
+  apt:
+    state: present
+    update_cache: true
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - samba
+
+- name: Add Samba Configuration under Global
+  blockinfile:
+    path: /etc/samba/smb.conf
+    create: false
+    state: present
+    insertafter: '\[global\]'
+    marker: "# {mark} Ansible SMB Global block"
+    mode: 0644
+    backup: true
+    block: "{{ global_smb_conf }}" 
+  notify: Restart the Samba service
+
+- name: Add additional Samba Configuration at the end
+  blockinfile:
+    path: /etc/samba/smb.conf
+    create: false
+    state: present
+    marker: "# {mark} Ansible SMB Shares configuration block"
+    mode: 0644
+    backup: true
+    block: "{{ smb_conf }}"
+  notify: Restart the Samba service
+
+

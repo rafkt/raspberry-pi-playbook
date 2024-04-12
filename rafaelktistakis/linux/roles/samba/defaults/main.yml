@@ -1,0 +1,26 @@
+---
+# defaults file for samba
+smb_conf: |
+  [rafaelktistakis]
+   comment = Accounts data directory
+   path = /media/rafaelktistakis
+   valid users = rafaelktistakis
+   browsable = yes
+   public = no
+   writable = yes
+  [torrentqueue_public]
+   comment = Samba on Ubuntu
+   public = yes
+   guest only = yes
+   writable = yes
+   force create mode = 0666
+   force directory mode 0777
+   path = /media/rafaelktistakis/Hercules/downloads/torrentqueue
+   read only = no
+   browsable = yes
+   force group = qbittorrent
+
+global_smb_conf: |
+  vfs objects = catia fruit streams_xattr 
+  fruit:aapl = yes
+  fruit:nfs_aces = no

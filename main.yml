@@ -73,6 +73,7 @@
     - wifipowermanagement
     - { role: qbittorrent, service_started: true, set_settings: false }
     - code_tunnel 
+    - {role: samba }
     # to remove the fstab role as disk has been disconnected
     # - fstab_umask_fix
     #- os_hardening
@@ -186,3 +187,15 @@
     - vault.yml
   vars:
     - ansible_become_pass: '{{ su_password }}'
+
+- name: Test Play / Quickly run a role under any host specified
+  tags: [all, test]
+  hosts: ganondorf
+  become: yes
+  collections:
+    - rafaelktistakis.pi
+    - rafaelktistakis.linux
+    - devsec.hardening
+  roles: 
+    - {role: samba} 
+ 

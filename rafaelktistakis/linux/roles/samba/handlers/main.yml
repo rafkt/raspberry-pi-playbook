@@ -1,0 +1,6 @@
+---
+# handlers file for samba
+- name: Restart the Samba service
+  systemd:
+    name: smbd.service
+    state: restarted
