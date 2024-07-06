@@ -190,12 +190,14 @@
 
 - name: Test Play / Quickly run a role under any host specified
   tags: [all, test]
-  hosts: ganondorf
+  hosts: 
+    #- fi
+    - ganondorf
   become: yes
   collections:
     - rafaelktistakis.pi
     - rafaelktistakis.linux
     - devsec.hardening
   roles: 
-    - {role: samba} 
- 
+    #    - { role: nginx_proxy_manager } 
+    - { role: pivpn }

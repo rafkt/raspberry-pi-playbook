@@ -1,0 +1,43 @@
+---
+# tasks file for pivpn
+- name: Check if PiVPN is installed (if yes, the skip this role)
+  shell: command -v pivpn -V >/dev/null 2>&1
+  register: installed
+  ignore_errors: yes
+  changed_when: false
+
+# Instead of having when for each task to check whether pivpn is installed or not, consider creating a seperate play and include it under a single condition here
+
+
+- name: Download PiVPN installation script into /tmp
+  get_url:
+    url: https://raw.githubusercontent.com/pivpn/pivpn/master/auto_install/install.sh
+    dest: /tmp/pivpn_install.sh
+    mode: 0777
+  when: installed.rc != 0
+
+- name: Creating PiVPN installation options (tmp file)
+  copy:
+    dest: /tmp/pivpn_setupVars.conf
+    content: "{{ vpn_conf }}"
+  when: installed.rc != 0
+
+
+# run installation script if not installed
+  # ./install.sh --unattended options.conf
+
+# restore from back-up if found in /tmp -- prompt user with message to rerun role if wih if not found or display command to run himself to restore 
+  # tar xzpfv <archive name>
+  # sudo cp -r etc/wireguard /etc
+  # sudo systemctl restart wg-quick@wg0
+
+#- name: Extract source archive into /tmp
+#  unarchive:
+#    src: /tmp/tmux-{{ tmux_version }}.tar.gz
+#    dest: /tmp
+#    creates: /tmp/tmux-{{ tmux_version }}
+#    remote_src: yes
+#    mode: 0777
+#  when: tmux_version not in current_tmux_version.stdout 
+
+

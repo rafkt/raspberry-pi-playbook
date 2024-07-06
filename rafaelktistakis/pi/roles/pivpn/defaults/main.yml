@@ -1,0 +1,21 @@
+---
+# defaults file for pivpn
+vpn_conf: |
+  IPv4dev=wlan0
+  install_user=rafaelktistakis
+  install_home=/home/rafaelktistakis
+  VPN=wireguard
+  pivpnNET=10.10.0.0
+  subnetClass=24
+  dhcpReserv=1
+  pivpnforceipv6route=1
+  pivpnenableipv6=0
+  ALLOWED_IPS="0.0.0.0/0, ::0/0"
+  pivpnPROTO=udp
+  pivpnMTU=1420
+  pivpnPORT=51820
+  pivpnDNS1=1.1.1.1
+  pivpnDNS2=1.0.0.1
+  pivpnHOST=fi.rafaelktistakis.io
+  UNATTUPG=1
+  INSTALLED_PACKAGES=(wireguard-tools qrencode)
