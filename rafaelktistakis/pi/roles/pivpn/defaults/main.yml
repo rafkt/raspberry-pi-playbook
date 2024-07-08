@@ -1,5 +1,9 @@
 ---
 # defaults file for pivpn
+
+restore_back_up: false
+force_restore_back_up: false
+
 vpn_conf: |
   IPv4dev=wlan0
   install_user=rafaelktistakis

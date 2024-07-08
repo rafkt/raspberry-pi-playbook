@@ -8,17 +8,21 @@
 
 # Instead of having when for each task to check whether pivpn is installed or not, consider creating a seperate play and include it under a single condition here
 
+- name: Creates /tmp directory
+  file:
+    path: /tmp/pivpn
+    state: directory
 
 - name: Download PiVPN installation script into /tmp
   get_url:
     url: https://raw.githubusercontent.com/pivpn/pivpn/master/auto_install/install.sh
-    dest: /tmp/pivpn_install.sh
+    dest: /tmp/pivpn/pivpn_install.sh
     mode: 0777
   when: installed.rc != 0
 
 - name: Creating PiVPN installation options (tmp file)
   copy:
-    dest: /tmp/pivpn_setupVars.conf
+    dest: /tmp/pivpn/pivpn_setupVars.conf
     content: "{{ vpn_conf }}"
   when: installed.rc != 0
 
@@ -31,13 +35,15 @@
   # sudo cp -r etc/wireguard /etc
   # sudo systemctl restart wg-quick@wg0
 
-#- name: Extract source archive into /tmp
-#  unarchive:
-#    src: /tmp/tmux-{{ tmux_version }}.tar.gz
-#    dest: /tmp
-#    creates: /tmp/tmux-{{ tmux_version }}
-#    remote_src: yes
-#    mode: 0777
-#  when: tmux_version not in current_tmux_version.stdout 
+
+
+- name: Extract source back-up archive into /tmp
+  unarchive:
+    src: /tmp/{{ back_up_archive }}
+    dest: /tmp/pivpn/
+    creates: /tmp/pivpn/etc
+    remote_src: yes
+    mode: 0777
+  when: (installed.rc != 0 and restore_back_up == true) or force_restore_back_up == true 
 
 
